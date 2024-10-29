@@ -1,0 +1,21 @@
+function separateRows($fileName){
+    $file = fopen($fileName, 'r');
+    $lines = file($fileName);
+    $linesAmount = count($lines);
+    $rows = [];
+    for ($i = 0; $i < $linesAmount; $i++) {
+        $rows[] = fgets($file);
+        $separatedRows[$i] = mb_str_split($rows[$i], $length = 4);
+    }
+    fclose($file);
+    return $separatedRows;
+}
+
+function writeRowsV2($separatedRows, $fileName) {
+    $file = fopen($fileName, 'w');
+    for($i = 0; $i < count($separatedRows); $i++) {
+        fwrite($file, $separatedRows[$i]);
+    }
+    fclose($file);
+    return 'Success';
+}
